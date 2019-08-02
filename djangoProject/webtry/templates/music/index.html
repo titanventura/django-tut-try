@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+    <div>
+            {% if albums %}
+            {% for album in albums %}
+            <h1 style="text-align: center;">
+                <a href="{{album.id}}" style="color:tomato;"> {{album}} </a>
+            </h1> 
+            {% endfor %}
+            {% else %}
+                <h2>You don't have any albums</h2>
+            {% endif %}
+    </div>
+</body>
+</html>

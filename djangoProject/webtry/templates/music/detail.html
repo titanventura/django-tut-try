@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+</head>
+
+{% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<body>
+    <div>
+            <h1>The title of the album is {{album.album_title}} and is of id {{album.id}}</h1>
+            <img src="{{ album.album_logo }}" alt="album_logo">
+            <h2>{{ album.artist }}</h2>
+            <form action="{% url 'favorite' album.pk %}" method="POST">
+                {% csrf_token %}
+                {% for song in album.song_set.all %}
+                    <input type="radio" name="song" id="song{{ forloop.counter }}" value="{{ song.id }}" />
+                    <label for=" song{{ forloop.counter }} ">
+                        {{song.title}}
+                        {% if song.is_favorite %}
+                            <img src="http://i.imgur.com/b9b13Rd.png" alt="favorited">
+                        {% endif %}
+                    </label><br>
+                {% endfor %}
+                <input type="submit" value="Favorite">
+            </form>
+            
+    </div>
+</body>
+</html>
